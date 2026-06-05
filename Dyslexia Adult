@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>成年人读写障碍筛查量表</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --warm: #e8dcc8;
+    --accent: #8b2e2e;
+    --accent2: #3d5a6e;
+    --mid: #7a6e5f;
+    --light: #d4c9b4;
+    --green: #3a6b4a;
+    --amber: #c17a2a;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+background: var(–paper);
+color: var(–ink);
+font-family: ‘Noto Sans SC’, serif;
+min-height: 100vh;
+background-image:
+radial-gradient(ellipse at 20% 0%, rgba(139,46,46,0.06) 0%, transparent 50%),
+radial-gradient(ellipse at 80% 100%, rgba(61,90,110,0.06) 0%, transparent 50%);
+}
+
+.header {
+background: var(–ink);
+color: var(–paper);
+padding: 2.5rem 2rem 2rem;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+
+.header::before {
+content: ‘’;
+position: absolute;
+inset: 0;
+background: repeating-linear-gradient(
+90deg,
+transparent,
+transparent 60px,
+rgba(245,240,232,0.03) 60px,
+rgba(245,240,232,0.03) 61px
+);
+}
+
+.header-badge {
+display: inline-block;
+border: 1px solid rgba(245,240,232,0.3);
+padding: 0.3rem 1rem;
+font-size: 0.7rem;
+letter-spacing: 0.15em;
+text-transform: uppercase;
+color: var(–light);
+margin-bottom: 1rem;
+font-family: ‘Noto Sans SC’, sans-serif;
+font-weight: 300;
+}
+
+.header h1 {
+font-family: ‘Noto Serif SC’, serif;
+font-size: clamp(1.4rem, 4vw, 2rem);
+font-weight: 600;
+letter-spacing: 0.05em;
+line-height: 1.4;
+position: relative;
+}
+
+.header p {
+margin-top: 0.8rem;
+font-size: 0.82rem;
+color: var(–light);
+font-weight: 300;
+letter-spacing: 0.03em;
+position: relative;
+}
+
+.container {
+max-width: 760px;
+margin: 0 auto;
+padding: 2rem 1.5rem 4rem;
+}
+
+.intro-card {
+background: white;
+border: 1px solid var(–light);
+border-left: 4px solid var(–accent2);
+padding: 1.4rem 1.6rem;
+margin-bottom: 2rem;
+border-radius: 2px;
+}
+
+.intro-card h3 {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 0.9rem;
+color: var(–accent2);
+margin-bottom: 0.6rem;
+font-weight: 600;
+}
+
+.intro-card p, .intro-card li {
+font-size: 0.82rem;
+color: var(–mid);
+line-height: 1.8;
+}
+
+.intro-card ul {
+padding-left: 1.2rem;
+margin-top: 0.4rem;
+}
+
+.section {
+margin-bottom: 2.5rem;
+}
+
+.section-header {
+display: flex;
+align-items: center;
+gap: 0.8rem;
+margin-bottom: 1.2rem;
+padding-bottom: 0.8rem;
+border-bottom: 2px solid var(–warm);
+}
+
+.section-num {
+width: 32px;
+height: 32px;
+background: var(–ink);
+color: var(–paper);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.75rem;
+font-weight: 600;
+letter-spacing: 0.05em;
+flex-shrink: 0;
+}
+
+.section-title {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 1rem;
+font-weight: 600;
+color: var(–ink);
+}
+
+.section-subtitle {
+font-size: 0.75rem;
+color: var(–mid);
+margin-top: 0.15rem;
+}
+
+.question {
+background: white;
+border: 1px solid var(–light);
+border-radius: 2px;
+padding: 1.2rem 1.4rem;
+margin-bottom: 0.8rem;
+transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.question:hover {
+border-color: var(–accent2);
+box-shadow: 0 2px 8px rgba(61,90,110,0.08);
+}
+
+.question.answered {
+border-left: 3px solid var(–green);
+}
+
+.q-text {
+font-size: 0.875rem;
+line-height: 1.75;
+color: var(–ink);
+margin-bottom: 1rem;
+font-weight: 400;
+}
+
+.q-num {
+display: inline-block;
+color: var(–accent);
+font-weight: 600;
+margin-right: 0.4rem;
+font-size: 0.8rem;
+}
+
+.options {
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+gap: 0.5rem;
+}
+
+.options.binary {
+grid-template-columns: repeat(2, 1fr);
+max-width: 280px;
+}
+
+.opt-btn {
+padding: 0.5rem 0.3rem;
+border: 1px solid var(–light);
+background: var(–paper);
+color: var(–mid);
+font-size: 0.75rem;
+font-family: ‘Noto Sans SC’, sans-serif;
+cursor: pointer;
+border-radius: 1px;
+transition: all 0.15s;
+text-align: center;
+line-height: 1.4;
+}
+
+.opt-btn:hover {
+border-color: var(–accent2);
+color: var(–accent2);
+background: rgba(61,90,110,0.05);
+}
+
+.opt-btn.selected {
+background: var(–accent2);
+border-color: var(–accent2);
+color: white;
+font-weight: 500;
+}
+
+.scale-labels {
+display: flex;
+justify-content: space-between;
+font-size: 0.68rem;
+color: var(–mid);
+margin-top: 0.4rem;
+padding: 0 0.2rem;
+}
+
+.submit-area {
+text-align: center;
+margin-top: 3rem;
+padding-top: 2rem;
+border-top: 1px solid var(–warm);
+}
+
+.progress-bar {
+background: var(–warm);
+height: 4px;
+border-radius: 2px;
+margin-bottom: 1rem;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–accent2), var(–green));
+transition: width 0.4s ease;
+border-radius: 2px;
+}
+
+.progress-text {
+font-size: 0.78rem;
+color: var(–mid);
+margin-bottom: 1.5rem;
+}
+
+.btn-submit {
+background: var(–ink);
+color: var(–paper);
+border: none;
+padding: 1rem 3rem;
+font-family: ‘Noto Serif SC’, serif;
+font-size: 1rem;
+font-weight: 600;
+letter-spacing: 0.08em;
+cursor: pointer;
+transition: all 0.2s;
+border-radius: 1px;
+}
+
+.btn-submit:hover:not(:disabled) {
+background: var(–accent);
+transform: translateY(-1px);
+box-shadow: 0 4px 16px rgba(139,46,46,0.3);
+}
+
+.btn-submit:disabled {
+opacity: 0.4;
+cursor: not-allowed;
+}
+
+/* RESULTS */
+#results {
+display: none;
+}
+
+.result-header {
+background: var(–ink);
+color: var(–paper);
+padding: 2rem;
+text-align: center;
+margin-bottom: 2rem;
+}
+
+.result-header h2 {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 1.3rem;
+font-weight: 600;
+margin-bottom: 0.5rem;
+}
+
+.score-display {
+display: flex;
+justify-content: center;
+gap: 2rem;
+margin: 1.5rem 0;
+flex-wrap: wrap;
+}
+
+.score-box {
+background: white;
+border: 1px solid var(–light);
+padding: 1.2rem 1.6rem;
+text-align: center;
+min-width: 120px;
+}
+
+.score-box .num {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 2.2rem;
+font-weight: 700;
+line-height: 1;
+}
+
+.score-box .label {
+font-size: 0.72rem;
+color: var(–mid);
+margin-top: 0.4rem;
+letter-spacing: 0.05em;
+}
+
+.score-box.total .num { color: var(–accent); }
+.score-box.level .num { font-size: 1.1rem; }
+
+.level-bar-wrap {
+background: white;
+border: 1px solid var(–light);
+padding: 1.4rem;
+margin-bottom: 1.5rem;
+}
+
+.level-bar-title {
+font-size: 0.8rem;
+color: var(–mid);
+margin-bottom: 0.8rem;
+}
+
+.level-track {
+height: 12px;
+background: var(–warm);
+border-radius: 6px;
+overflow: hidden;
+margin-bottom: 0.5rem;
+}
+
+.level-fill {
+height: 100%;
+border-radius: 6px;
+transition: width 1s ease;
+}
+
+.level-fill.low { background: var(–green); }
+.level-fill.mid { background: var(–amber); }
+.level-fill.high { background: var(–accent); }
+
+.level-marks {
+display: flex;
+justify-content: space-between;
+font-size: 0.65rem;
+color: var(–mid);
+}
+
+.dimension-results {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 1rem;
+margin-bottom: 1.5rem;
+}
+
+.dim-card {
+background: white;
+border: 1px solid var(–light);
+padding: 1rem 1.2rem;
+}
+
+.dim-card h4 {
+font-size: 0.78rem;
+color: var(–mid);
+margin-bottom: 0.6rem;
+font-weight: 500;
+}
+
+.dim-score-bar {
+height: 6px;
+background: var(–warm);
+border-radius: 3px;
+overflow: hidden;
+margin-bottom: 0.4rem;
+}
+
+.dim-fill {
+height: 100%;
+border-radius: 3px;
+background: var(–accent2);
+transition: width 1s ease;
+}
+
+.dim-card .pct {
+font-size: 0.72rem;
+color: var(–accent2);
+font-weight: 500;
+}
+
+.interpretation {
+background: white;
+border: 1px solid var(–light);
+border-left: 4px solid var(–accent);
+padding: 1.4rem 1.6rem;
+margin-bottom: 1.5rem;
+}
+
+.interpretation h3 {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 0.95rem;
+color: var(–accent);
+margin-bottom: 0.8rem;
+}
+
+.interpretation p {
+font-size: 0.83rem;
+line-height: 1.9;
+color: var(–ink);
+}
+
+.recommendations {
+background: white;
+border: 1px solid var(–light);
+padding: 1.4rem 1.6rem;
+margin-bottom: 1.5rem;
+}
+
+.recommendations h3 {
+font-family: ‘Noto Serif SC’, serif;
+font-size: 0.95rem;
+color: var(–accent2);
+margin-bottom: 0.8rem;
+}
+
+.rec-item {
+display: flex;
+gap: 0.8rem;
+margin-bottom: 0.7rem;
+align-items: flex-start;
+}
+
+.rec-icon {
+width: 20px;
+height: 20px;
+background: var(–accent2);
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.6rem;
+flex-shrink: 0;
+margin-top: 0.1rem;
+}
+
+.rec-text {
+font-size: 0.82rem;
+line-height: 1.7;
+color: var(–ink);
+}
+
+.disclaimer {
+background: rgba(193,122,42,0.08);
+border: 1px solid rgba(193,122,42,0.3);
+padding: 1rem 1.2rem;
+border-radius: 2px;
+margin-top: 1.5rem;
+}
+
+.disclaimer p {
+font-size: 0.75rem;
+color: var(–amber);
+line-height: 1.7;
+}
+
+.btn-retry {
+background: transparent;
+color: var(–mid);
+border: 1px solid var(–light);
+padding: 0.7rem 2rem;
+font-family: ‘Noto Sans SC’, sans-serif;
+font-size: 0.82rem;
+cursor: pointer;
+transition: all 0.2s;
+margin-top: 1.5rem;
+}
+
+.btn-retry:hover {
+border-color: var(–ink);
+color: var(–ink);
+}
+
+@media (max-width: 500px) {
+.options { grid-template-columns: repeat(2, 1fr); }
+.dimension-results { grid-template-columns: 1fr; }
+.score-display { gap: 1rem; }
+}
+</style>
+
+</head>
+<body>
+
+<div id="assessment">
+  <div class="header">
+    <div class="header-badge">心理筛查工具 · 专业版</div>
+    <h1>成年人读写障碍筛查量表</h1>
+    <p>Adult Dyslexia Screening Assessment · 参考 DAST / BDA Adult Checklist 标准</p>
+  </div>
+
+  <div class="container">
+    <div class="intro-card">
+      <h3>📋 使用说明</h3>
+      <p>本量表适用于18岁以上成年人，共涵盖<strong>6个维度、35道题目</strong>，用于初步筛查读写障碍相关症状。请根据您的<strong>实际日常体验</strong>作答，不存在对错之分。</p>
+      <ul>
+        <li>题目1–25：频率量表（从不 → 总是）</li>
+        <li>题目26–35：是/否选择</li>
+        <li>完成全部题目后点击"生成报告"</li>
+      </ul>
+    </div>
+
+```
+<!-- 维度一 -->
+<div class="section" id="sec1">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div>
+      <div class="section-title">阅读与文字识别</div>
+      <div class="section-subtitle">评估对书面文字的识别与理解能力</div>
+    </div>
+  </div>
+
+  <div class="question" id="q1">
+    <div class="q-text"><span class="q-num">1.</span>在阅读时，您是否会无意中跳行、重复读同一行，或者丢失阅读位置？</div>
+    <div class="options" data-q="1" data-dim="reading"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q2">
+    <div class="q-text"><span class="q-num">2.</span>阅读时，您是否感觉文字在纸上"移动"、模糊或重叠？</div>
+    <div class="options" data-q="2" data-dim="reading"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q3">
+    <div class="q-text"><span class="q-num">3.</span>读完一段文字后，您是否经常记不住刚才读了什么内容？</div>
+    <div class="options" data-q="3" data-dim="reading"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q4">
+    <div class="q-text"><span class="q-num">4.</span>在朗读时，您是否经常读错、跳字，或将相似字词弄混（如"己"和"已"）？</div>
+    <div class="options" data-q="4" data-dim="reading"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q5">
+    <div class="q-text"><span class="q-num">5.</span>与同龄人相比，您的阅读速度是否明显偏慢，或需要反复阅读才能理解？</div>
+    <div class="options" data-q="5" data-dim="reading"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度二 -->
+<div class="section" id="sec2">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div>
+      <div class="section-title">书写与拼写</div>
+      <div class="section-subtitle">评估文字书写、字形记忆与拼写能力</div>
+    </div>
+  </div>
+
+  <div class="question" id="q6">
+    <div class="q-text"><span class="q-num">6.</span>书写时，您是否常常写出字形错误的字（笔画多或少、结构颠倒）？</div>
+    <div class="options" data-q="6" data-dim="writing"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q7">
+    <div class="q-text"><span class="q-num">7.</span>即使知道一个字的读音，您是否仍难以想起怎么书写它？</div>
+    <div class="options" data-q="7" data-dim="writing"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q8">
+    <div class="q-text"><span class="q-num">8.</span>您是否会将字母或部首的方向写反（如"b/d"、"6/9"）？</div>
+    <div class="options" data-q="8" data-dim="writing"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q9">
+    <div class="q-text"><span class="q-num">9.</span>写文章或邮件时，即使内容想清楚了，是否也很难把它们准确表达成书面文字？</div>
+    <div class="options" data-q="9" data-dim="writing"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度三 -->
+<div class="section" id="sec3">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div>
+      <div class="section-title">语音处理与听觉</div>
+      <div class="section-subtitle">评估语音意识、音节处理与听觉记忆</div>
+    </div>
+  </div>
+
+  <div class="question" id="q10">
+    <div class="q-text"><span class="q-num">10.</span>您是否觉得很难把一个词按音节拆分，或者辨认出押韵的词？</div>
+    <div class="options" data-q="10" data-dim="phonology"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q11">
+    <div class="q-text"><span class="q-num">11.</span>听别人说一长串信息（如电话号码、地址）时，您是否容易记混或遗漏？</div>
+    <div class="options" data-q="11" data-dim="phonology"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q12">
+    <div class="q-text"><span class="q-num">12.</span>您是否在嘈杂环境中特别难以听清别人说的话，比其他人更明显？</div>
+    <div class="options" data-q="12" data-dim="phonology"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q13">
+    <div class="q-text"><span class="q-num">13.</span>您是否常常会把听到的词"听错"，将其理解为发音相似的另一个词？</div>
+    <div class="options" data-q="13" data-dim="phonology"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度四 -->
+<div class="section" id="sec4">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div>
+      <div class="section-title">工作记忆与信息处理</div>
+      <div class="section-subtitle">评估短时记忆、顺序处理与认知负荷</div>
+    </div>
+  </div>
+
+  <div class="question" id="q14">
+    <div class="q-text"><span class="q-num">14.</span>您是否在做事时容易忘记刚才看过或听过的信息（如忘记菜谱步骤、被打断后不知道做到哪步）？</div>
+    <div class="options" data-q="14" data-dim="memory"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q15">
+    <div class="q-text"><span class="q-num">15.</span>您是否难以记住一串数字（如手机号、账号），需要反复查看？</div>
+    <div class="options" data-q="15" data-dim="memory"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q16">
+    <div class="q-text"><span class="q-num">16.</span>同时处理多项任务时，您是否常感到思维混乱或其中一项任务的信息"消失"了？</div>
+    <div class="options" data-q="16" data-dim="memory"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q17">
+    <div class="q-text"><span class="q-num">17.</span>您是否经常在说话中途忘记原本想说的词，只能用"那个……就是那个"来代替？</div>
+    <div class="options" data-q="17" data-dim="memory"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q18">
+    <div class="q-text"><span class="q-num">18.</span>您是否难以记住日期、约定事项或时间表，即使已经记录也难以想起？</div>
+    <div class="options" data-q="18" data-dim="memory"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度五 -->
+<div class="section" id="sec5">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div>
+      <div class="section-title">方向感与空间处理</div>
+      <div class="section-subtitle">评估左右辨别、序列顺序与空间定向</div>
+    </div>
+  </div>
+
+  <div class="question" id="q19">
+    <div class="q-text"><span class="q-num">19.</span>您是否经常混淆"左"和"右"，或需要停顿想一下才能分辨？</div>
+    <div class="options" data-q="19" data-dim="spatial"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q20">
+    <div class="q-text"><span class="q-num">20.</span>在按顺序排列事物时（如按字母、时间顺序），您是否觉得特别困难？</div>
+    <div class="options" data-q="20" data-dim="spatial"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q21">
+    <div class="q-text"><span class="q-num">21.</span>即使在熟悉的地方，您是否也容易迷路或记不住路线？</div>
+    <div class="options" data-q="21" data-dim="spatial"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q22">
+    <div class="q-text"><span class="q-num">22.</span>您是否难以阅读地图，或将地图方向与现实方向对应起来？</div>
+    <div class="options" data-q="22" data-dim="spatial"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度六 -->
+<div class="section" id="sec6">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div>
+      <div class="section-title">情绪与生活影响</div>
+      <div class="section-subtitle">评估读写困难对日常生活及情绪的影响</div>
+    </div>
+  </div>
+
+  <div class="question" id="q23">
+    <div class="q-text"><span class="q-num">23.</span>因为阅读或书写困难，您是否曾回避某些工作、学习或社交场合？</div>
+    <div class="options" data-q="23" data-dim="impact"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q24">
+    <div class="q-text"><span class="q-num">24.</span>您是否会因为读写任务感到焦虑、挫败或羞愧，远超一般人的程度？</div>
+    <div class="options" data-q="24" data-dim="impact"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+
+  <div class="question" id="q25">
+    <div class="q-text"><span class="q-num">25.</span>您是否在完成需要大量阅读或写作的任务时，总是比他人花费多得多的时间和精力？</div>
+    <div class="options" data-q="25" data-dim="impact"></div>
+    <div class="scale-labels"><span>从不</span><span>总是</span></div>
+  </div>
+</div>
+
+<!-- 维度七：是/否题 -->
+<div class="section" id="sec7">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div>
+      <div class="section-title">背景与历史信息</div>
+      <div class="section-subtitle">了解个人学习史与家族背景（是/否作答）</div>
+    </div>
+  </div>
+
+  <div class="question" id="q26">
+    <div class="q-text"><span class="q-num">26.</span>您在小学阶段是否曾被老师或家长反映，学习读写比同班同学困难？</div>
+    <div class="options binary" data-q="26" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q27">
+    <div class="q-text"><span class="q-num">27.</span>您的父母、兄弟姐妹或子女中，是否有人被诊断或疑似有读写障碍/学习障碍？</div>
+    <div class="options binary" data-q="27" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q28">
+    <div class="q-text"><span class="q-num">28.</span>您是否曾被正式诊断为读写障碍、学习障碍或相关神经发育性障碍？</div>
+    <div class="options binary" data-q="28" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q29">
+    <div class="q-text"><span class="q-num">29.</span>您说话时，是否曾被他人指出您有口齿不清、音节混淆或语言发育迟缓的问题（儿童期）？</div>
+    <div class="options binary" data-q="29" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q30">
+    <div class="q-text"><span class="q-num">30.</span>您是否在需要快速阅读或当众朗读时，感到比其他场合明显更多的恐惧或困难？</div>
+    <div class="options binary" data-q="30" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q31">
+    <div class="q-text"><span class="q-num">31.</span>您是否觉得自己的口头表达能力（说话、表达想法）远比书面表达能力更强？</div>
+    <div class="options binary" data-q="31" data-dim="strengths" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q32">
+    <div class="q-text"><span class="q-num">32.</span>您是否在图像记忆、创意思维、空间想象或动手操作方面有明显优势？</div>
+    <div class="options binary" data-q="32" data-dim="strengths" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q33">
+    <div class="q-text"><span class="q-num">33.</span>学生时代您的成绩是否常常与智力/能力不相符——感觉自己懂，但考试（尤其是书写类）成绩不理想？</div>
+    <div class="options binary" data-q="33" data-dim="history" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q34">
+    <div class="q-text"><span class="q-num">34.</span>您是否经常使用某些策略来"掩盖"或弥补读写困难（如总是让别人帮忙检查文件、用语音输入代替打字）？</div>
+    <div class="options binary" data-q="34" data-dim="impact" data-type="binary"></div>
+  </div>
+
+  <div class="question" id="q35">
+    <div class="q-text"><span class="q-num">35.</span>您的视力经过矫正后是否正常？（即读写困难与视力问题无关）</div>
+    <div class="options binary" data-q="35" data-dim="control" data-type="binary"></div>
+  </div>
+</div>
+
+<div class="submit-area">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-text" id="progressText">已完成 0 / 35 题</div>
+  <button class="btn-submit" id="submitBtn" disabled onclick="generateReport()">生成筛查报告</button>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- RESULTS PAGE -->
+
+<div id="results">
+  <div class="result-header">
+    <div class="header-badge" style="border-color:rgba(245,240,232,0.3);color:var(--light);font-size:0.7rem;letter-spacing:0.15em;display:inline-block;padding:0.3rem 1rem;margin-bottom:1rem;">筛查结果报告</div>
+    <h2>成年人读写障碍筛查报告</h2>
+    <p style="font-size:0.8rem;color:var(--light);margin-top:0.4rem;">本报告仅供参考，不构成临床诊断</p>
+  </div>
+
+  <div class="container">
+    <div class="score-display">
+      <div class="score-box total">
+        <div class="num" id="totalScore">—</div>
+        <div class="label">总分</div>
+      </div>
+      <div class="score-box">
+        <div class="num" id="maxScore">—</div>
+        <div class="label">满分</div>
+      </div>
+      <div class="score-box level">
+        <div class="num" id="riskLevel" style="color:var(--accent)">—</div>
+        <div class="label">风险等级</div>
+      </div>
+    </div>
+
+```
+<div class="level-bar-wrap">
+  <div class="level-bar-title">总体风险分布</div>
+  <div class="level-track">
+    <div class="level-fill" id="levelFill" style="width:0%"></div>
+  </div>
+  <div class="level-marks">
+    <span>低风险 (0–40%)</span>
+    <span>中等 (40–65%)</span>
+    <span>高风险 (65–100%)</span>
+  </div>
+</div>
+
+<h3 style="font-family:'Noto Serif SC',serif;font-size:0.9rem;color:var(--mid);margin-bottom:1rem;letter-spacing:0.05em;">各维度得分</h3>
+<div class="dimension-results" id="dimResults"></div>
+
+<div class="interpretation" id="interpretation">
+  <h3>结果解读</h3>
+  <p id="interpretText"></p>
+</div>
+
+<div class="recommendations" id="recommendations">
+  <h3>建议与后续步骤</h3>
+  <div id="recList"></div>
+</div>
+
+<div class="disclaimer">
+  <p>⚠️ <strong>重要声明：</strong>本量表仅为初步筛查工具，结果不等同于临床诊断。读写障碍的正式诊断需由具有资质的心理学家或语言病理学家通过标准化测评完成。如结果提示中高风险，建议咨询专业机构进一步评估。</p>
+</div>
+
+<div style="text-align:center">
+  <button class="btn-retry" onclick="resetAssessment()">重新测评</button>
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+const answers = {};
+const TOTAL_Q = 35;
+
+const freqLabels = ['从不', '偶尔', '有时', '经常', '总是'];
+const binaryLabels = ['是', '否'];
+
+// Build options
+document.querySelectorAll('.options').forEach(container => {
+  const q = container.dataset.q;
+  const isBinary = container.dataset.type === 'binary';
+  const labels = isBinary ? binaryLabels : freqLabels;
+
+  labels.forEach((label, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = label;
+    const val = isBinary ? (i === 0 ? 1 : 0) : i;
+    btn.dataset.val = val;
+    btn.onclick = () => selectAnswer(q, val, container, btn, isBinary);
+    container.appendChild(btn);
+  });
+});
+
+function selectAnswer(q, val, container, btn, isBinary) {
+  container.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[q] = val;
+  document.getElementById('q' + q).classList.add('answered');
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = Object.keys(answers).length;
+  const pct = (done / TOTAL_Q) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `已完成 ${done} / ${TOTAL_Q} 题`;
+  document.getElementById('submitBtn').disabled = done < TOTAL_Q;
+}
+
+function generateReport() {
+  // Scoring
+  // Freq questions (1-25): 0-4 scale, higher = more symptoms
+  // Binary (26-35): yes=1, no=0. Q35 (vision ok) is reversed
+  
+  const dims = {
+    reading: { qs: [1,2,3,4,5], max: 20, label: '阅读与文字识别' },
+    writing: { qs: [6,7,8,9], max: 16, label: '书写与拼写' },
+    phonology: { qs: [10,11,12,13], max: 16, label: '语音处理' },
+    memory: { qs: [14,15,16,17,18], max: 20, label: '工作记忆' },
+    spatial: { qs: [19,20,21,22], max: 16, label: '方向空间感' },
+    impact: { qs: [23,24,25,34], max: 13, label: '生活影响' },
+    history: { qs: [26,27,28,29,30,33], max: 6, label: '学习史背景' },
+  };
+
+  // Calculate dim scores
+  const dimScores = {};
+  let totalScore = 0;
+  let totalMax = 0;
+
+  for (const [key, dim] of Object.entries(dims)) {
+    let score = 0;
+    dim.qs.forEach(q => {
+      score += (answers[q] || 0);
+    });
+    dimScores[key] = { score, max: dim.max, label: dim.label };
+    totalScore += score;
+    totalMax += dim.max;
+  }
+
+  const pct = totalScore / totalMax;
+
+  // Render
+  document.getElementById('totalScore').textContent = totalScore;
+  document.getElementById('maxScore').textContent = totalMax;
+
+  let riskLevel, riskColor, fillClass;
+  if (pct < 0.35) {
+    riskLevel = '低风险'; riskColor = 'var(--green)'; fillClass = 'low';
+  } else if (pct < 0.60) {
+    riskLevel = '中等风险'; riskColor = 'var(--amber)'; fillClass = 'mid';
+  } else {
+    riskLevel = '高风险'; riskColor = 'var(--accent)'; fillClass = 'high';
+  }
+
+  document.getElementById('riskLevel').textContent = riskLevel;
+  document.getElementById('riskLevel').style.color = riskColor;
+  const fill = document.getElementById('levelFill');
+  fill.style.width = (pct * 100) + '%';
+  fill.className = 'level-fill ' + fillClass;
+
+  // Dim results
+  const dimContainer = document.getElementById('dimResults');
+  dimContainer.innerHTML = '';
+  for (const [key, d] of Object.entries(dimScores)) {
+    const p = d.score / d.max;
+    dimContainer.innerHTML += `
+      <div class="dim-card">
+        <h4>${d.label}</h4>
+        <div class="dim-score-bar"><div class="dim-fill" style="width:${p*100}%"></div></div>
+        <div class="pct">${d.score} / ${d.max}（${Math.round(p*100)}%）</div>
+      </div>`;
+  }
+
+  // Interpretation
+  let interp = '';
+  if (pct < 0.35) {
+    interp = '您的筛查结果处于<strong>低风险范围</strong>。当前报告的读写相关困难处于较低水平，与典型成年人的日常体验相符。目前无明显读写障碍迹象，但若您对某些特定领域仍有疑虑，可咨询专业人士进一步了解。';
+  } else if (pct < 0.60) {
+    interp = '您的筛查结果处于<strong>中等风险范围</strong>。您报告了一定程度的读写相关困难，部分维度的得分提示可能存在读写障碍的某些特征。这不一定意味着您有读写障碍，但建议您进一步了解或寻求专业评估，尤其是当这些困难影响到工作或日常生活时。';
+  } else {
+    interp = '您的筛查结果处于<strong>高风险范围</strong>，多个维度呈现显著的读写障碍相关特征。读写障碍是一种神经发育性差异，与智力水平无关，且是可以得到支持和改善的。建议您尽快联系专业的心理评估机构或特殊教育专家进行正式的标准化诊断评估。';
+  }
+  document.getElementById('interpretText').innerHTML = interp;
+
+  // Recommendations
+  const recs = [];
+  if (pct >= 0.60) {
+    recs.push({ icon: '★', text: '寻求正式诊断：联系心理评估机构、语言病理学家或特殊教育专家，进行包括标准化测验在内的全面评估（如WAIS、DAST等）。' });
+    recs.push({ icon: '◆', text: '了解支持资源：读写障碍协会（如中国残疾人联合会相关机构）可提供读写辅助工具、辅导资源和法律保障信息。' });
+  }
+  if (pct >= 0.40) {
+    recs.push({ icon: '●', text: '使用辅助技术：文字转语音（TTS）、语音输入、电子阅读器等工具可显著减轻读写负担，建议尝试。' });
+    recs.push({ icon: '●', text: '记录困难模式：在日常生活中记录哪些情境下读写最为困难，这有助于专业评估时提供更准确的信息。' });
+  }
+  recs.push({ icon: '○', text: '保护自我认知：读写障碍者往往在创意、口头表达、整体思维等方面具有突出优势，认识到这些优势同样重要。' });
+  recs.push({ icon: '○', text: '若目前无明显影响，可定期关注自身读写状况，尤其是面临新的学习或职业挑战时。' });
+
+  const recList = document.getElementById('recList');
+  recList.innerHTML = recs.map(r => `
+    <div class="rec-item">
+      <div class="rec-icon">${r.icon}</div>
+      <div class="rec-text">${r.text}</div>
+    </div>`).join('');
+
+  // Show results
+  document.getElementById('assessment').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Animate bars after display
+  setTimeout(() => {
+    document.querySelectorAll('.dim-fill').forEach(el => {
+      const w = el.style.width;
+      el.style.width = '0%';
+      setTimeout(() => el.style.width = w, 50);
+    });
+  }, 100);
+}
+
+function resetAssessment() {
+  Object.keys(answers).forEach(k => delete answers[k]);
+  document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('.question').forEach(q => q.classList.remove('answered'));
+  updateProgress();
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('assessment').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
